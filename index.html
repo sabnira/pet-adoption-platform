@@ -27,6 +27,7 @@
                 colors: {
                     primaryColor: '#0E7A81',
                     secondaryColor: 'rgba(19, 19, 19, 0.7)',
+                    bgColor: 'rgba(19, 19, 19, 0.03)',
                     customBorder: 'rgba(14, 122, 129, 0.15)',
                 },
                 fontFamily:{
@@ -39,7 +40,9 @@
 
 </head>
 
-<body class="font-lato w-10/12 mx-auto">
+<body class="font-lato">
+
+  <section class="w-10/12 mx-auto">
     <!-- nav section -->
     <section>  
         <div class="navbar bg-base-100">
@@ -126,14 +129,14 @@
 
 
     <!-- all pet card section-->
-    <section class="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-4">
+    <section class="mb-8 grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-4">
 
       <!-- card section -->
       <div class="col-span-1 lg:col-span-9">
         
-        <div class="flex gap-4">
+        <div class="grid gap-4 grid-cols-1 lg:grid-cols-3">
           <!-- card 1 -->
-          <div class="card bg-base-100 w-96 border-2">
+          <div class="card bg-base-100 w-full border-2">
             <figure class="px-6 pt-6">
               <img
                 src="./images/pet.webp"
@@ -162,12 +165,12 @@
               <div class="card-actions flex pt-4">
                 <button class="btn text-xl px-2  bg-white border-2 border-customBorder"><i class="text-secondaryColor fa-regular fa-thumbs-up"></i></button>
                 <button class="btn bg-white border-2 border-customBorder text-primaryColor">Adopt</button>
-                <button class="btn bg-white border-2 border-customBorder text-primaryColor">Details</button>
+                <button onclick="my_modal_1.showModal()" class="btn bg-white border-2 border-customBorder text-primaryColor">Details</button>
               </div>
             </div>
           </div>
   
-          <div class="card bg-base-100 w-96 border-2">
+          <div class="card bg-base-100 w-full border-2">
             <figure class="px-6 pt-6">
               <img
                 src="./images/pet.webp"
@@ -201,7 +204,7 @@
             </div>
           </div>
   
-          <div class="card bg-base-100 w-96 border-2">
+          <div class="card bg-base-100 w-full border-2">
             <figure class="px-6 pt-6">
               <img
                 src="./images/pet.webp"
@@ -239,6 +242,16 @@
 
       </div>
 
+          <!-- no information -->
+          <div class="hidden col-span-1 lg:col-span-9 bg-bgColor mx-auto text-center content-center py-12 rounded-2xl">
+            <div class="w-9/12 mx-auto">
+              <img src="./images/error.webp" alt="" class="mx-auto">
+              <h4 class="text-2xl font-bold py-4">No Information Available</h4>
+              <p class="text-secondaryColor">It is a long established fact that a reader will be distracted by the readable content of a page when looking at 
+              its layout. The point of using Lorem Ipsum is that it has a.</p>
+            </div>
+          </div>
+
       <!-- gallery section -->
       <div class="col-span-1 lg:col-span-3 ">
        <div class="grid grid-cols-2 gap-4 border-2 p-4 rounded-2xl">
@@ -252,6 +265,88 @@
       </div>
     </section>
     
+          <!-- modal -->
+          <dialog id="my_modal_1" class="modal">
+          <div class="modal-box">
+            <img src="./images/pet.webp" alt="">
+            <h3 class="text-xl font-bold pb-4">Alessia Max</h3>
+
+            <div class="flex gap-8 border-b-2 pb-4 text-secondaryColor">
+            <div>
+              <p><i class="pr-2 fa-solid fa-grip-vertical"></i>
+                <span>Breed: Golden retriever</span></p>
+  
+              <p><i class="pr-2 fa-solid fa-venus"></i>
+                <span>Gender: Female</span></p>
+  
+              <p><i class="pr-2 fa-solid fa-venus"></i>
+                <span>Vaccinated status: Partially</span></p>
+            </div>
+            <div>
+              <p><i class="pr-2 fa-regular fa-calendar"></i>
+                <span>Birth: 2024</span></p>
+              
+              <p><i class="pr-2 fa-solid fa-dollar-sign"></i>
+                <span>Price: 199$</span></p>
+            </div>
+            </div>
+
+            <h4 class="py-4">Details Information</h4>
+            <p class="text-secondaryColor">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
+              The point of using is that it has a more-or-less normal distribution of letters, as opposed to using.</p>
+
+          <div class="modal-action">
+            <form method="dialog" class="w-full">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn w-full bg-[rgba(14,122,129,0.1)] border-[rgb(14,122,129)] text-[rgb(14,122,129)]">Cancel</button>
+            </form>
+          </div>
+          </div>
+          </dialog>
+
+  </section>
+
+
+  <!-- footer section -->
+    <section class="bg-black text-gray-400 py-14">
+      <div class="w-10/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        
+        <div class="space-y-1 py-6">
+          <div class="flex text-gray-100">
+            <img src="./images/logo.webp" alt="">
+            <p class="text-xl px-2 font-semibold">Peddy</p>
+          </div>
+          <p>Location: av. Washington 165, NY CA</p>
+          <p>54003</p>
+          <p>Phone: +31 85 964 47 25</p>
+          <p>Email: info@yourdomain.com</p>
+          <p>Openings hours: 9.00 AM - 5.00 PM</p>
+
+          <div class="flex w-8 space-x-4">
+            <img src="./images/facebook.png" alt="">
+            <img class="bg-white" src="./images/twitter.png" alt="">
+            <img src="./images/youtube.png" alt="">
+            <img src="./images/instagram.png" alt="">
+          </div>
+        </div>
+
+        <div class="space-y-1 py-6">
+          <h4 class="text-lg text-gray-100">Useful Links</h4>
+          <p>Home</p>
+          <p>About Us</p>
+          <p>Animals</p>
+          <p>Foundation</p>
+          <p>Contact</p>
+        </div>
+
+        <div class="space-y-2 py-6">
+          <h4 class="text-lg text-gray-100">Drop a Message</h4>
+          <input class="w-3/6 px-4 py-2 rounded-xl bg-slate-800" type="text" placeholder="Enter your email"> <br>
+          <button class="btn rounded-xl text-base w-3/6 bg-primaryColor text-white border-none">Subscribe</button>
+        </div>
+
+      </div>
+    </section>
 
 
     <script src="./js/index.js"></script>
