@@ -12,6 +12,12 @@ const loadDetails = (petId) => {
     .catch((error) => console.log(error));
 }
 
+const loadCategories = () => {
+  fetch(`https://openapi.programming-hero.com/api/peddy/categories`)
+  .then((res) => res.json())
+  .then((data) => displayCategories(data.categories))
+  .catch((error) => console.log(error));
+}
 
 
 const displayAllPets = (pets) => {
@@ -88,5 +94,25 @@ const displayDetails = (pet) => {
   customModal.showModal();
 }
 
+const displayCategories = (categories) => {
+
+  // console.log(categories);
+  const categoryContainer = document.getElementById("category");
+
+  categories.forEach((item) => {
+    //console.log(item);
+    const buttonContainer = document.createElement("button");
+    buttonContainer.classList = "btn text-xl h-20 bg-white hover:bg-[rgba(14,122,129,0.1)] hover:border-[rgb(14,122,129)] hover:rounded-full";
+
+    buttonContainer.innerHTML = `
+        <span><img src=${item.category_icon} alt="" class="w-12 h-12 mr-2"></span>
+                ${item.category}
+    `
+    categoryContainer.append(buttonContainer);
+  })
+}
+
+
+
 loadAllPets();
-loadDetails();
+loadCategories();
