@@ -19,10 +19,28 @@ const loadCategories = () => {
   .catch((error) => console.log(error));
 }
 
+const loadCategoryPets = (category) => {
+  fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
+  .then((res) => res.json())
+  .then((data) => displayAllPets(data.data))
+  .then((error) => console.log(error))
+}
+
+
 
 const displayAllPets = (pets) => {
 
     const allPetsContainer = document.getElementById("allPets");
+    const noContentContainer = document.getElementById("noContent")
+
+    allPetsContainer.innerHTML = "";
+
+    if(pets.length == 0){
+      noContentContainer.classList.remove("hidden");
+      return;
+    }else{
+      noContentContainer.classList.add("hidden");
+    }
 
     pets.forEach( (pet) => {
         // console.log(pet);
@@ -108,6 +126,9 @@ const displayCategories = (categories) => {
         <span><img src=${item.category_icon} alt="" class="w-12 h-12 mr-2"></span>
                 ${item.category}
     `
+
+    buttonContainer.setAttribute("onclick", `loadCategoryPets('${item.category}')`);
+
     categoryContainer.append(buttonContainer);
   })
 }
