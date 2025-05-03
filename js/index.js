@@ -67,7 +67,7 @@ const displayAllPets = (pets) => {
                 <span>Price: ${pet.price}$</span></p>
   
               <div class="card-actions flex pt-4">
-                <button class="btn text-xl px-4  bg-white border-2 border-customBorder"><i class="text-secondaryColor fa-regular fa-thumbs-up"></i></button>
+                <button onclick="displayLikePets('${pet.image}')" class="btn text-xl px-4  bg-white border-2 border-customBorder"><i class="text-secondaryColor fa-regular fa-thumbs-up"></i></button>
                 <button class="btn bg-white border-2 border-customBorder text-primaryColor">Adopt</button>
                 <button onclick="loadDetails('${pet.petId}')" class="btn bg-white border-2 border-customBorder text-primaryColor">Details</button>
               </div>
@@ -131,6 +131,21 @@ const displayCategories = (categories) => {
 
     categoryContainer.append(buttonContainer);
   })
+}
+
+
+
+
+function displayLikePets(img) {
+ 
+  const likeContainer = document.getElementById("likePets");
+  likeContainer.className = "grid grid-cols-2 gap-4 border-2 p-4 rounded-2xl";
+  
+  const image = document.createElement("img");
+  image.className = "rounded-lg";
+  image.src = img;
+
+  likeContainer.appendChild(image);
 }
 
 
