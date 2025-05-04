@@ -68,7 +68,9 @@ const displayAllPets = (pets) => {
   
               <div class="card-actions flex pt-4">
                 <button onclick="displayLikePets('${pet.image}')" class="btn text-xl px-4  bg-white border-2 border-customBorder"><i class="text-secondaryColor fa-regular fa-thumbs-up"></i></button>
-                <button class="btn bg-white border-2 border-customBorder text-primaryColor">Adopt</button>
+
+                <button onclick="displayAdopt(this)" class="btn bg-white border-2 border-customBorder text-primaryColor">Adopt</button>
+
                 <button onclick="loadDetails('${pet.petId}')" class="btn bg-white border-2 border-customBorder text-primaryColor">Details</button>
               </div>
             </div>
@@ -79,7 +81,7 @@ const displayAllPets = (pets) => {
 }
 
 const displayDetails = (pet) => {
-  console.log(pet);
+  // console.log(pet);
   const detailContainer = document.getElementById("modal-content");
 
   detailContainer.innerHTML = `
@@ -133,20 +135,43 @@ const displayCategories = (categories) => {
   })
 }
 
-
-
-
 function displayLikePets(img) {
  
   const likeContainer = document.getElementById("likePets");
   likeContainer.className = "grid grid-cols-2 gap-4 border-2 p-4 rounded-2xl";
-  
+
   const image = document.createElement("img");
   image.className = "rounded-lg";
   image.src = img;
 
   likeContainer.appendChild(image);
 }
+
+const displayAdopt = (adoptBtn) => {
+
+  const countNum = document.getElementById('countNumber');
+  
+  let count = 3;
+  countNum.textContent = count;
+
+  const timer = setInterval(() => {
+    count--;
+    countNum.textContent = count;
+
+    if (count <= 1) {
+      clearInterval(timer);
+      adoptModel.close();
+
+      adoptBtn.disabled = true;
+      adoptBtn.innerText = "Adopted";
+    }
+  }, 1000);
+
+  
+  adoptModel.showModal();
+}
+
+
 
 
 
