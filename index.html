@@ -86,7 +86,8 @@
             <p class="text-gray-600 text-lg">Bringing Families Together ❤️‍🔥</p>
             <h3 class="text-2xl md:text-4xl lg:text-7xl my-7">Your Path to Adoption Starts Here</h3>
             <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
-            <button class="btn bg-primaryColor text-white mt-4">View More</button>
+            <a href="#adopt"> <button class="btn bg-primaryColor text-white mt-4">View More</button></a>
+            
         </div>
         
         <img src="./images/pet.webp" alt="">
@@ -94,7 +95,7 @@
 
 
     <!-- category section -->
-    <section class="my-8">
+    <section id="adopt" class="my-8">
         <div class="w-9/12 lg:w-6/12 content-center text-center mx-auto">
             <h4 class="text-3xl font-bold">Adopt Your Best Friend</h4>
             <p class="text-gray-500 text-sm my-5">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
@@ -111,12 +112,18 @@
     <!-- sort by price section -->
     <section class="flex justify-between items-center mb-8">
       <h4 class="text-xl font-bold">Best Deal For you</h4>
-      <button class="btn bg-primaryColor text-white">Sort By Price</button>
+      <button onclick="sortByPriceDesc()"  class="btn bg-primaryColor text-white">Sort By Price</button>
     </section>
 
 
+    <!-- loading -->
+    <div class="text-center">
+        <span id="loadData" class="hidden my-8 loading loading-bars loading-xl w-10"></span>
+    </div>
+    
+
     <!-- all pet card section-->
-    <section class="mb-8 grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-4">
+    <section id="allPetSection" class="mb-8 grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-4">
 
       <!-- card section -->
       <div class="col-span-1 lg:col-span-9">
@@ -175,7 +182,7 @@
 
             </div>
           </dialog>
-          
+
   </section>
 
 

@@ -1,3 +1,20 @@
+removeActiveClass = () => {
+  const buttons = document.getElementsByClassName("categoryButton");
+
+  for(let btn of buttons){
+    btn.classList.add("bg-white");
+    btn.classList.remove(
+        "bg-[rgba(14,122,129,0.1)]",
+        "border-[rgb(14,122,129)]",
+        "rounded-full");
+}
+}
+
+const sortByPriceDesc = () => {
+  const sortedPets = [...currentPets].sort((a, b) => b.price - a.price);
+  displayAllPets(sortedPets);
+};
+
 const loadAllPets = () => {
     fetch("https://openapi.programming-hero.com/api/peddy/pets")
     .then((res) => res.json())
@@ -20,15 +37,42 @@ const loadCategories = () => {
 }
 
 const loadCategoryPets = (category) => {
-  fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
-  .then((res) => res.json())
-  .then((data) => displayAllPets(data.data))
-  .then((error) => console.log(error))
+
+  document.getElementById("loadData").classList.remove("hidden");
+  document.getElementById("allPetSection").classList.add("hidden");
+
+  setTimeout(function () {
+    fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
+    .then((res) => res.json())
+    .then((data) => {
+
+      //category button active
+      removeActiveClass();
+      const activeBtn = document.getElementById(`btn-${category}`);
+      activeBtn.classList.remove("bg-white");
+      activeBtn.classList.add(
+        "bg-[rgba(14,122,129,0.1)]",
+        "border-[rgb(14,122,129)]",
+        "rounded-full"
+      );
+      
+      displayAllPets(data.data)
+
+    })
+    .then((error) => console.log(error))
+  },2000)
+  
 }
 
 
-
+let currentPets = [];
 const displayAllPets = (pets) => {
+    currentPets = pets; // Store pets globally
+
+    // loading
+    document.getElementById("loadData").classList.add("hidden");
+    document.getElementById("allPetSection").classList.remove("hidden");
+    //
 
     const allPetsContainer = document.getElementById("allPets");
     const noContentContainer = document.getElementById("noContent")
@@ -55,16 +99,16 @@ const displayAllPets = (pets) => {
               <h2 class="card-title font-bold">${pet.pet_name}</h2>
   
               <p class="text-secondaryColor"><i class="pr-2 fa-solid fa-grip-vertical"></i>
-                  <span>Breed: ${pet.breed}</span></p>
+                  <span>Breed: ${pet.breed || "Not Available"}</span></p>
   
               <p class="text-secondaryColor"><i class="pr-2 fa-regular fa-calendar"></i>
-                <span>Birth: ${pet.date_of_birth}</span></p>
+                <span>Birth: ${pet.date_of_birth || "Not Available"}</span></p>
   
               <p class="text-secondaryColor"><i class="pr-2 fa-solid fa-venus"></i>
-                <span>Gender: ${pet.gender}</span></p>
+                <span>Gender: ${pet.gender || "Not Available"}</span></p>
 
               <p class="pb-4 border-b-2 text-secondaryColor"><i class="pr-2 fa-solid fa-dollar-sign"></i>
-                <span>Price: ${pet.price}$</span></p>
+                <span>Price: ${pet.price || "Not Available"}$</span></p>
   
               <div class="card-actions flex pt-4">
                 <button onclick="displayLikePets('${pet.image}')" class="btn text-xl px-4  bg-white border-2 border-customBorder"><i class="text-secondaryColor fa-regular fa-thumbs-up"></i></button>
@@ -122,7 +166,10 @@ const displayCategories = (categories) => {
   categories.forEach((item) => {
     //console.log(item);
     const buttonContainer = document.createElement("button");
-    buttonContainer.classList = "btn text-xl h-20 bg-white hover:bg-[rgba(14,122,129,0.1)] hover:border-[rgb(14,122,129)] hover:rounded-full";
+
+    buttonContainer.setAttribute("id", `btn-${item.category}`);
+
+    buttonContainer.classList = "btn categoryButton text-xl h-20 bg-white hover:bg-[rgba(14,122,129,0.1)] hover:border-[rgb(14,122,129)] hover:rounded-full";
 
     buttonContainer.innerHTML = `
         <span><img src=${item.category_icon} alt="" class="w-12 h-12 mr-2"></span>
@@ -170,9 +217,6 @@ const displayAdopt = (adoptBtn) => {
   
   adoptModel.showModal();
 }
-
-
-
 
 
 loadAllPets();
